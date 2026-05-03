@@ -1,0 +1,63 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Seller {
+  id         String             @id @default(cuid())
+  name       String
+  region     String             @default("US")
+  connection Connection?
+  shops      Shop[]
+  authLog    AuthorisationLog[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  @@map("Sellers")
+}
+
+model Connection {
+  id                 String   @id @default(cuid())
+  accessToken        String
+  accessTokenExpiry  String
+  refreshToken       String
+  refreshTokenExpiry String
+  sellerId           String   @unique
+  seller             Seller   @relation(fields: [sellerId], references: [id])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("Connections")
+}
+
+model Shop {
+  id         String   @id @default(cuid())
+  ttsId      String   @unique
+  name       String
+  region     String
+  sellerType String
+  cipher     String
+  code       String
+  sellerId   String
+  seller     Seller   @relation(fields: [sellerId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("Shops")
+}
+
+model AuthorisationLog {
+  id        String   @id @default(cuid())
+  userId    String
+  initial   Boolean  @default(false)
+  sellerId  String
+  seller    Seller   @relation(fields: [sellerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("AuthorisationLogs")
+}
