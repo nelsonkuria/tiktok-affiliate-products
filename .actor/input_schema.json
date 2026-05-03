@@ -1,0 +1,22 @@
+{
+  "title": "Fetch UFC data",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "resource": {
+      "type": "string",
+      "title": "Resource",
+      "description": "Enter the desired resource",
+      "editor": "textfield",
+      "prefill": "default"
+    },
+    "region": {
+      "type": "string",
+      "title": "Region",
+      "description": "ISO 3166-2 country code",
+      "editor": "textfield",
+      "prefill": "us"
+    }
+  },
+  "required": ["resource"]
+}

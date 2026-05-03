@@ -1,0 +1,17 @@
+{
+  "extends": "@apify/tsconfig",
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "noUnusedLocals": false,
+    "skipLibCheck": true,
+    "paths": {
+      "~/*": ["./src/*"],
+      "#/*": ["./*"]
+    }
+  },
+  "include": ["./src/**/*", "./prisma/*"]
+}

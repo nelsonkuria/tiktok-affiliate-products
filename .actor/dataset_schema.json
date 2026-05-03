@@ -1,0 +1,18 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": ["status"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "status": { "format": "text" }
+        }
+      }
+    }
+  }
+}
