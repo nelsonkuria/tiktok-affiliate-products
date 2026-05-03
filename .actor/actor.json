@@ -14,11 +14,14 @@
     "TSC_DATABASE_URL": "",
     "DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=...",
 
-    "US_APP_KEY": "6g92g072qqmno",
-    "US_APP_SECRET": "1baf103cec1a2d68461b60c0e9a02d48c5dbd86d",
+    "US_APP_KEY": "6g92g071ehm0g",
+    "US_APP_SECRET": "45836e7f99dc2337e0badfac43cf35ef9e13ce86",
 
-    "US_APP_KEY_STAGE": "6g92g071ehm0g",
-    "US_APP_SECRET_STAGE": "45836e7f99dc2337e0badfac43cf35ef9e13ce86"
+    "FALLBACK_APP_KEY": "6g92g072qqmno",
+    "FALLBACK_APP_SECRET": "1baf103cec1a2d68461b60c0e9a02d48c5dbd86d",
+
+    "FALLBACK_SHOP_CIPHER": "TTP_7YCHQgAAAACC22gagyFiMmhmoHpK2cBe",
+    "FALLBACK_ACCESS_TOKEN": ""
   },
   "storages": {
     "dataset": "./dataset_schema.json"
