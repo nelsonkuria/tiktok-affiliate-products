@@ -3,7 +3,7 @@ import { createHmac } from 'node:crypto';
 import type { AccessTokenResponse } from '../types/TikTok.js';
 import prisma from './prisma.tsc.js';
 
-const getTimeStamp = () => {
+export const getTimeStamp = () => {
   return Math.floor(Date.now() / 1000);
 };
 
