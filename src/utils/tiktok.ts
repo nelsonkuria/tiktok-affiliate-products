@@ -1,3 +1,5 @@
+import { createHmac } from 'node:crypto';
+
 import type { AccessTokenResponse } from '../types/TikTok.js';
 import prisma from './prisma.tsc.js';
 
@@ -121,3 +123,56 @@ export const getSellerCredentials = async (region: string) => {
 
   return null;
 };
+
+const getQueryParams = (request: Request | string) => {
+  const route = request instanceof Request ? request.url : request;
+  const url = new URL(route);
+  return Object.fromEntries(url.searchParams.entries());
+};
+
+export async function generateSign(
+  url: string,
+  region: string,
+  isFormData?: boolean,
+  requestBody?: Record<string, unknown>,
+) {
+  const { appSecret } = getRegionCredentials(region);
+  const excludeKeys = ['sign'] as string[];
+
+  /**
+   * To generate the signature, we'll create the string to sign then encode it using hmac-sha256
+   * This will happen in a number of steps
+   * 1. We'll extract all query params excluding `sign` and reorder the param keys alphabetically
+   * 2. Concatenate the query params in the format {key}{value}
+   * 3. We will then append the resulting string to the API request path
+   * 4. If content-type is application/json, we'll append the API request body to the sign string
+   * 5. Wrap the string with the app secret
+   * 6. Encode it with hmac-sha256
+   */
+
+  let signString = '';
+
+  const params = getQueryParams(url) || {};
+  const sortedParams = Object.keys(params)
+    .filter((key) => !excludeKeys.includes(key))
+    .sort()
+    .map((key) => ({ key, value: params[key] }));
+
+  const paramString = sortedParams.map(({ key, value }) => `${key}${value}`).join('');
+
+  const { pathname } = new URL(url);
+  signString = `${pathname}${paramString}`;
+
+  if (!isFormData) {
+    if (requestBody && Object.keys(requestBody).length) {
+      const body = JSON.stringify(requestBody);
+      signString += body;
+    }
+  }
+
+  signString = `${appSecret}${signString}${appSecret}`;
+
+  const hmac = createHmac('sha256', appSecret).update(signString);
+
+  return hmac.digest('hex');
+}
