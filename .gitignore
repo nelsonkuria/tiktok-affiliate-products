@@ -25,3 +25,4 @@ storage/key_value_stores/default/*
 
 # Prisma generated client
 # /generated/prisma
+/prisma-buzz/*
