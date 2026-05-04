@@ -19,7 +19,7 @@ model Product {
   tiktokId      String  @unique
   title         String
   mainImage     String
-  link          String
+  detailsLink   String
   categories    Json
   saleRegion    String
   originalPrice Json
