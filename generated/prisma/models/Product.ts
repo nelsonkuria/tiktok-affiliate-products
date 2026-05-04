@@ -43,6 +43,7 @@ export type ProductMinAggregateOutputType = {
   saleRegion: string | null
   unitsSold: number | null
   hasInventory: boolean | null
+  lastSync: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +57,7 @@ export type ProductMaxAggregateOutputType = {
   saleRegion: string | null
   unitsSold: number | null
   hasInventory: boolean | null
+  lastSync: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +76,7 @@ export type ProductCountAggregateOutputType = {
   unitsSold: number
   hasInventory: number
   shop: number
+  lastSync: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -97,6 +100,7 @@ export type ProductMinAggregateInputType = {
   saleRegion?: true
   unitsSold?: true
   hasInventory?: true
+  lastSync?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -110,6 +114,7 @@ export type ProductMaxAggregateInputType = {
   saleRegion?: true
   unitsSold?: true
   hasInventory?: true
+  lastSync?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -128,6 +133,7 @@ export type ProductCountAggregateInputType = {
   unitsSold?: true
   hasInventory?: true
   shop?: true
+  lastSync?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -233,6 +239,7 @@ export type ProductGroupByOutputType = {
   unitsSold: number
   hasInventory: boolean
   shop: runtime.JsonValue
+  lastSync: Date
   createdAt: Date
   updatedAt: Date
   _count: ProductCountAggregateOutputType | null
@@ -274,6 +281,7 @@ export type ProductWhereInput = {
   unitsSold?: Prisma.IntFilter<"Product"> | number
   hasInventory?: Prisma.BoolFilter<"Product"> | boolean
   shop?: Prisma.JsonFilter<"Product">
+  lastSync?: Prisma.DateTimeFilter<"Product"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
 }
@@ -292,6 +300,7 @@ export type ProductOrderByWithRelationInput = {
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
   shop?: Prisma.SortOrder
+  lastSync?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _relevance?: Prisma.ProductOrderByRelevanceInput
@@ -314,6 +323,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   unitsSold?: Prisma.IntFilter<"Product"> | number
   hasInventory?: Prisma.BoolFilter<"Product"> | boolean
   shop?: Prisma.JsonFilter<"Product">
+  lastSync?: Prisma.DateTimeFilter<"Product"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
 }, "id" | "tiktokId">
@@ -332,6 +342,7 @@ export type ProductOrderByWithAggregationInput = {
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
   shop?: Prisma.SortOrder
+  lastSync?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
@@ -358,6 +369,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   unitsSold?: Prisma.IntWithAggregatesFilter<"Product"> | number
   hasInventory?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   shop?: Prisma.JsonWithAggregatesFilter<"Product">
+  lastSync?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
 }
@@ -376,6 +388,7 @@ export type ProductCreateInput = {
   unitsSold: number
   hasInventory: boolean
   shop: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -394,6 +407,7 @@ export type ProductUncheckedCreateInput = {
   unitsSold: number
   hasInventory: boolean
   shop: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -412,6 +426,7 @@ export type ProductUpdateInput = {
   unitsSold?: Prisma.IntFieldUpdateOperationsInput | number
   hasInventory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shop?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -430,6 +445,7 @@ export type ProductUncheckedUpdateInput = {
   unitsSold?: Prisma.IntFieldUpdateOperationsInput | number
   hasInventory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shop?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -448,6 +464,7 @@ export type ProductCreateManyInput = {
   unitsSold: number
   hasInventory: boolean
   shop: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -466,6 +483,7 @@ export type ProductUpdateManyMutationInput = {
   unitsSold?: Prisma.IntFieldUpdateOperationsInput | number
   hasInventory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shop?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -484,6 +502,7 @@ export type ProductUncheckedUpdateManyInput = {
   unitsSold?: Prisma.IntFieldUpdateOperationsInput | number
   hasInventory?: Prisma.BoolFieldUpdateOperationsInput | boolean
   shop?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  lastSync?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -508,6 +527,7 @@ export type ProductCountOrderByAggregateInput = {
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
   shop?: Prisma.SortOrder
+  lastSync?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -525,6 +545,7 @@ export type ProductMaxOrderByAggregateInput = {
   saleRegion?: Prisma.SortOrder
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
+  lastSync?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -538,6 +559,7 @@ export type ProductMinOrderByAggregateInput = {
   saleRegion?: Prisma.SortOrder
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
+  lastSync?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -582,6 +604,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   unitsSold?: boolean
   hasInventory?: boolean
   shop?: boolean
+  lastSync?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["product"]>
@@ -600,6 +623,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   unitsSold?: boolean
   hasInventory?: boolean
   shop?: boolean
+  lastSync?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["product"]>
@@ -618,6 +642,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   unitsSold?: boolean
   hasInventory?: boolean
   shop?: boolean
+  lastSync?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["product"]>
@@ -636,11 +661,12 @@ export type ProductSelectScalar = {
   unitsSold?: boolean
   hasInventory?: boolean
   shop?: boolean
+  lastSync?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tiktokId" | "title" | "mainImage" | "detailsLink" | "categories" | "saleRegion" | "originalPrice" | "salesPrice" | "commission" | "unitsSold" | "hasInventory" | "shop" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tiktokId" | "title" | "mainImage" | "detailsLink" | "categories" | "saleRegion" | "originalPrice" | "salesPrice" | "commission" | "unitsSold" | "hasInventory" | "shop" | "lastSync" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
@@ -659,6 +685,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     unitsSold: number
     hasInventory: boolean
     shop: runtime.JsonValue
+    lastSync: Date
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["product"]>
@@ -1097,6 +1124,7 @@ export interface ProductFieldRefs {
   readonly unitsSold: Prisma.FieldRef<"Product", 'Int'>
   readonly hasInventory: Prisma.FieldRef<"Product", 'Boolean'>
   readonly shop: Prisma.FieldRef<"Product", 'Json'>
+  readonly lastSync: Prisma.FieldRef<"Product", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Product", 'DateTime'>
 }
