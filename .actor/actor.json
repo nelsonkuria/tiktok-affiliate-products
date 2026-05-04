@@ -11,7 +11,7 @@
   "output": "./output_schema.json",
   "dockerfile": "../Dockerfile",
   "environmentVariables": {
-    "TSC_DATABASE_URL": "",
+    "TSC_DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19pQWhBNVY1S29TclJRbmFMYWtuODYiLCJhcGlfa2V5IjoiMDFLQUdLUU5UMEtDMFhEQ0FBVzVSUUIzVzYiLCJ0ZW5hbnRfaWQiOiJmMDY5MGJjOWVlNGU5MGI1MDU4YmY1MzM5NDA1ZGU4ODJiOWM2MTU3NmRmYzhhNzYyMjVjYjM5YmVkMjMzNzBkIiwiaW50ZXJuYWxfc2VjcmV0IjoiNDcxODg4OTUtNDc1Ny00OTg0LTg4NmEtZDRiOTVmMjNhMTFlIn0.e0VOTn-uAdjUS9wi5yuaDr8dx7eVJSit9yKivbvrTzs",
     "DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=...",
 
     "US_APP_KEY": "6g92g071ehm0g",
