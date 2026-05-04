@@ -1,7 +1,7 @@
 {
   "actorSpecification": 1,
-  "name": "tiktok-shop-affiliate-products",
-  "title": "Get information about products",
+  "name": "tiktok-affiliate-products",
+  "title": "Get affiliate product information",
   "description": "Retrieve accurate prices, commission, units sold and inventory numbers.",
   "version": "0.1",
   "meta": {
