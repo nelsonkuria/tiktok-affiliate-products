@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
-  "name": "lemur-apify-starter",
-  "title": "App title",
-  "description": "App description",
+  "name": "tiktok-shop-affiliate-products",
+  "title": "Get information about products",
+  "description": "Retrieve accurate prices, commission, units sold and inventory numbers.",
   "version": "0.1",
   "meta": {
     "templateId": "ts-start"
