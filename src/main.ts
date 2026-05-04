@@ -1,6 +1,6 @@
 import { Actor } from 'apify';
 
-import { seedProducts } from './utils/seeder.js';
+import { seedProducts } from './utils/products.js';
 
 await Actor.init();
 
