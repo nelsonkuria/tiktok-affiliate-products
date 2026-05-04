@@ -54,7 +54,9 @@ export const ModelName = {
   Seller: 'Seller',
   Connection: 'Connection',
   Shop: 'Shop',
-  AuthorisationLog: 'AuthorisationLog'
+  AuthorisationLog: 'AuthorisationLog',
+  Category: 'Category',
+  Brands: 'Brands'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,6 +126,32 @@ export const AuthorisationLogScalarFieldEnum = {
 } as const
 
 export type AuthorisationLogScalarFieldEnum = (typeof AuthorisationLogScalarFieldEnum)[keyof typeof AuthorisationLogScalarFieldEnum]
+
+
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  cid: 'cid',
+  parentId: 'parentId',
+  name: 'name',
+  isLeaf: 'isLeaf',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const BrandsScalarFieldEnum = {
+  id: 'id',
+  tiktokId: 'tiktokId',
+  name: 'name',
+  avatar: 'avatar',
+  regions: 'regions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BrandsScalarFieldEnum = (typeof BrandsScalarFieldEnum)[keyof typeof BrandsScalarFieldEnum]
 
 
 export const SortOrder = {

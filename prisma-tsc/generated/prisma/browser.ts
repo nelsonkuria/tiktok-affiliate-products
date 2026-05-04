@@ -37,3 +37,13 @@ export type Shop = Prisma.ShopModel
  * 
  */
 export type AuthorisationLog = Prisma.AuthorisationLogModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Brands
+ * 
+ */
+export type Brands = Prisma.BrandsModel
