@@ -13,3 +13,24 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Product {
+  id            String  @id @default(cuid())
+  tiktokId      String  @unique
+  title         String
+  mainImage     String
+  link          String
+  categories    Json
+  saleRegion    String
+  originalPrice Json
+  salesPrice    Json
+  commission    Json
+  unitsSold     Int
+  hasInventory  Boolean
+  shop          Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}
