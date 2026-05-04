@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 import { withAccelerate } from '@prisma/extension-accelerate';
 
-import { PrismaClient } from '../../prisma-tsc/generated/prisma/client.js';
+import { PrismaClient } from '../../prisma-buzz/generated/prisma/client.js';
 
 const accelerateUrl = process.env.BQ_DATABASE_URL ?? '';
 
