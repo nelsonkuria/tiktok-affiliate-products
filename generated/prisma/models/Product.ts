@@ -39,7 +39,7 @@ export type ProductMinAggregateOutputType = {
   tiktokId: string | null
   title: string | null
   mainImage: string | null
-  link: string | null
+  detailsLink: string | null
   saleRegion: string | null
   unitsSold: number | null
   hasInventory: boolean | null
@@ -52,7 +52,7 @@ export type ProductMaxAggregateOutputType = {
   tiktokId: string | null
   title: string | null
   mainImage: string | null
-  link: string | null
+  detailsLink: string | null
   saleRegion: string | null
   unitsSold: number | null
   hasInventory: boolean | null
@@ -65,7 +65,7 @@ export type ProductCountAggregateOutputType = {
   tiktokId: number
   title: number
   mainImage: number
-  link: number
+  detailsLink: number
   categories: number
   saleRegion: number
   originalPrice: number
@@ -93,7 +93,7 @@ export type ProductMinAggregateInputType = {
   tiktokId?: true
   title?: true
   mainImage?: true
-  link?: true
+  detailsLink?: true
   saleRegion?: true
   unitsSold?: true
   hasInventory?: true
@@ -106,7 +106,7 @@ export type ProductMaxAggregateInputType = {
   tiktokId?: true
   title?: true
   mainImage?: true
-  link?: true
+  detailsLink?: true
   saleRegion?: true
   unitsSold?: true
   hasInventory?: true
@@ -119,7 +119,7 @@ export type ProductCountAggregateInputType = {
   tiktokId?: true
   title?: true
   mainImage?: true
-  link?: true
+  detailsLink?: true
   categories?: true
   saleRegion?: true
   originalPrice?: true
@@ -224,7 +224,7 @@ export type ProductGroupByOutputType = {
   tiktokId: string
   title: string
   mainImage: string
-  link: string
+  detailsLink: string
   categories: runtime.JsonValue
   saleRegion: string
   originalPrice: runtime.JsonValue
@@ -265,7 +265,7 @@ export type ProductWhereInput = {
   tiktokId?: Prisma.StringFilter<"Product"> | string
   title?: Prisma.StringFilter<"Product"> | string
   mainImage?: Prisma.StringFilter<"Product"> | string
-  link?: Prisma.StringFilter<"Product"> | string
+  detailsLink?: Prisma.StringFilter<"Product"> | string
   categories?: Prisma.JsonFilter<"Product">
   saleRegion?: Prisma.StringFilter<"Product"> | string
   originalPrice?: Prisma.JsonFilter<"Product">
@@ -283,7 +283,7 @@ export type ProductOrderByWithRelationInput = {
   tiktokId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  link?: Prisma.SortOrder
+  detailsLink?: Prisma.SortOrder
   categories?: Prisma.SortOrder
   saleRegion?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
@@ -305,7 +305,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   title?: Prisma.StringFilter<"Product"> | string
   mainImage?: Prisma.StringFilter<"Product"> | string
-  link?: Prisma.StringFilter<"Product"> | string
+  detailsLink?: Prisma.StringFilter<"Product"> | string
   categories?: Prisma.JsonFilter<"Product">
   saleRegion?: Prisma.StringFilter<"Product"> | string
   originalPrice?: Prisma.JsonFilter<"Product">
@@ -323,7 +323,7 @@ export type ProductOrderByWithAggregationInput = {
   tiktokId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  link?: Prisma.SortOrder
+  detailsLink?: Prisma.SortOrder
   categories?: Prisma.SortOrder
   saleRegion?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
@@ -349,7 +349,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   tiktokId?: Prisma.StringWithAggregatesFilter<"Product"> | string
   title?: Prisma.StringWithAggregatesFilter<"Product"> | string
   mainImage?: Prisma.StringWithAggregatesFilter<"Product"> | string
-  link?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  detailsLink?: Prisma.StringWithAggregatesFilter<"Product"> | string
   categories?: Prisma.JsonWithAggregatesFilter<"Product">
   saleRegion?: Prisma.StringWithAggregatesFilter<"Product"> | string
   originalPrice?: Prisma.JsonWithAggregatesFilter<"Product">
@@ -367,7 +367,7 @@ export type ProductCreateInput = {
   tiktokId: string
   title: string
   mainImage: string
-  link: string
+  detailsLink: string
   categories: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion: string
   originalPrice: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -385,7 +385,7 @@ export type ProductUncheckedCreateInput = {
   tiktokId: string
   title: string
   mainImage: string
-  link: string
+  detailsLink: string
   categories: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion: string
   originalPrice: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -403,7 +403,7 @@ export type ProductUpdateInput = {
   tiktokId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
-  link?: Prisma.StringFieldUpdateOperationsInput | string
+  detailsLink?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion?: Prisma.StringFieldUpdateOperationsInput | string
   originalPrice?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -421,7 +421,7 @@ export type ProductUncheckedUpdateInput = {
   tiktokId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
-  link?: Prisma.StringFieldUpdateOperationsInput | string
+  detailsLink?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion?: Prisma.StringFieldUpdateOperationsInput | string
   originalPrice?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -439,7 +439,7 @@ export type ProductCreateManyInput = {
   tiktokId: string
   title: string
   mainImage: string
-  link: string
+  detailsLink: string
   categories: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion: string
   originalPrice: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -457,7 +457,7 @@ export type ProductUpdateManyMutationInput = {
   tiktokId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
-  link?: Prisma.StringFieldUpdateOperationsInput | string
+  detailsLink?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion?: Prisma.StringFieldUpdateOperationsInput | string
   originalPrice?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -475,7 +475,7 @@ export type ProductUncheckedUpdateManyInput = {
   tiktokId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
-  link?: Prisma.StringFieldUpdateOperationsInput | string
+  detailsLink?: Prisma.StringFieldUpdateOperationsInput | string
   categories?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   saleRegion?: Prisma.StringFieldUpdateOperationsInput | string
   originalPrice?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -499,7 +499,7 @@ export type ProductCountOrderByAggregateInput = {
   tiktokId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  link?: Prisma.SortOrder
+  detailsLink?: Prisma.SortOrder
   categories?: Prisma.SortOrder
   saleRegion?: Prisma.SortOrder
   originalPrice?: Prisma.SortOrder
@@ -521,7 +521,7 @@ export type ProductMaxOrderByAggregateInput = {
   tiktokId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  link?: Prisma.SortOrder
+  detailsLink?: Prisma.SortOrder
   saleRegion?: Prisma.SortOrder
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
@@ -534,7 +534,7 @@ export type ProductMinOrderByAggregateInput = {
   tiktokId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
-  link?: Prisma.SortOrder
+  detailsLink?: Prisma.SortOrder
   saleRegion?: Prisma.SortOrder
   unitsSold?: Prisma.SortOrder
   hasInventory?: Prisma.SortOrder
@@ -573,7 +573,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tiktokId?: boolean
   title?: boolean
   mainImage?: boolean
-  link?: boolean
+  detailsLink?: boolean
   categories?: boolean
   saleRegion?: boolean
   originalPrice?: boolean
@@ -591,7 +591,7 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tiktokId?: boolean
   title?: boolean
   mainImage?: boolean
-  link?: boolean
+  detailsLink?: boolean
   categories?: boolean
   saleRegion?: boolean
   originalPrice?: boolean
@@ -609,7 +609,7 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tiktokId?: boolean
   title?: boolean
   mainImage?: boolean
-  link?: boolean
+  detailsLink?: boolean
   categories?: boolean
   saleRegion?: boolean
   originalPrice?: boolean
@@ -627,7 +627,7 @@ export type ProductSelectScalar = {
   tiktokId?: boolean
   title?: boolean
   mainImage?: boolean
-  link?: boolean
+  detailsLink?: boolean
   categories?: boolean
   saleRegion?: boolean
   originalPrice?: boolean
@@ -640,7 +640,7 @@ export type ProductSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tiktokId" | "title" | "mainImage" | "link" | "categories" | "saleRegion" | "originalPrice" | "salesPrice" | "commission" | "unitsSold" | "hasInventory" | "shop" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tiktokId" | "title" | "mainImage" | "detailsLink" | "categories" | "saleRegion" | "originalPrice" | "salesPrice" | "commission" | "unitsSold" | "hasInventory" | "shop" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
@@ -650,7 +650,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     tiktokId: string
     title: string
     mainImage: string
-    link: string
+    detailsLink: string
     categories: runtime.JsonValue
     saleRegion: string
     originalPrice: runtime.JsonValue
@@ -1088,7 +1088,7 @@ export interface ProductFieldRefs {
   readonly tiktokId: Prisma.FieldRef<"Product", 'String'>
   readonly title: Prisma.FieldRef<"Product", 'String'>
   readonly mainImage: Prisma.FieldRef<"Product", 'String'>
-  readonly link: Prisma.FieldRef<"Product", 'String'>
+  readonly detailsLink: Prisma.FieldRef<"Product", 'String'>
   readonly categories: Prisma.FieldRef<"Product", 'Json'>
   readonly saleRegion: Prisma.FieldRef<"Product", 'String'>
   readonly originalPrice: Prisma.FieldRef<"Product", 'Json'>

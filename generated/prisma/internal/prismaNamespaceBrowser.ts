@@ -75,7 +75,7 @@ export const ProductScalarFieldEnum = {
   tiktokId: 'tiktokId',
   title: 'title',
   mainImage: 'mainImage',
-  link: 'link',
+  detailsLink: 'detailsLink',
   categories: 'categories',
   saleRegion: 'saleRegion',
   originalPrice: 'originalPrice',
@@ -128,7 +128,7 @@ export const ProductOrderByRelevanceFieldEnum = {
   tiktokId: 'tiktokId',
   title: 'title',
   mainImage: 'mainImage',
-  link: 'link',
+  detailsLink: 'detailsLink',
   saleRegion: 'saleRegion'
 } as const
 
