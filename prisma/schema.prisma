@@ -15,8 +15,8 @@ datasource db {
 }
 
 model Product {
-  id            String  @id @default(cuid())
-  tiktokId      String  @unique
+  id            String   @id @default(cuid())
+  tiktokId      String   @unique
   title         String
   mainImage     String
   detailsLink   String
@@ -28,6 +28,7 @@ model Product {
   unitsSold     Int
   hasInventory  Boolean
   shop          Json
+  lastSync      DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
