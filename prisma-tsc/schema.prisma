@@ -64,7 +64,7 @@ model AuthorisationLog {
 
 model Category {
   id       String  @id @default(cuid())
-  cid      String
+  cid      String  @unique
   parentId String
   name     String
   isLeaf   Boolean
