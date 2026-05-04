@@ -15,6 +15,7 @@ storage/key_value_stores/*
 !storage/key_value_stores/default
 storage/key_value_stores/default/*
 !storage/key_value_stores/default/INPUT.json
+prisma-buzz
 
 # Added by Apify CLI
 .venv
@@ -25,4 +26,3 @@ storage/key_value_stores/default/*
 
 # Prisma generated client
 # /generated/prisma
-/prisma-buzz/*
