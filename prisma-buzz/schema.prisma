@@ -42,3 +42,16 @@ model Product {
 
   @@map("Products")
 }
+
+model Category {
+  id       String  @id @default(cuid())
+  cid      String
+  parentId String
+  name     String
+  isLeaf   Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Categories")
+}
