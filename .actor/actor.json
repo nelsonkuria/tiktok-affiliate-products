@@ -12,6 +12,7 @@
   "dockerfile": "../Dockerfile",
   "environmentVariables": {
     "TSC_DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19pQWhBNVY1S29TclJRbmFMYWtuODYiLCJhcGlfa2V5IjoiMDFLQUdLUU5UMEtDMFhEQ0FBVzVSUUIzVzYiLCJ0ZW5hbnRfaWQiOiJmMDY5MGJjOWVlNGU5MGI1MDU4YmY1MzM5NDA1ZGU4ODJiOWM2MTU3NmRmYzhhNzYyMjVjYjM5YmVkMjMzNzBkIiwiaW50ZXJuYWxfc2VjcmV0IjoiNDcxODg4OTUtNDc1Ny00OTg0LTg4NmEtZDRiOTVmMjNhMTFlIn0.e0VOTn-uAdjUS9wi5yuaDr8dx7eVJSit9yKivbvrTzs",
+    "BQ_DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19aNE1NX0VUSmpGaGpkZHcyVU9LODAiLCJhcGlfa2V5IjoiMDFLQTJTVjRONzVLNUg3OTQwNFA2RVYzNVIiLCJ0ZW5hbnRfaWQiOiJmZjM2YTJhZjc3YmRkNGFiMTU1MmExNWRhNDlhYjYzOWViOGUzMGE0ZDRhNDhjNTg2MDgyNTNlNGJhNzc1YWIyIiwiaW50ZXJuYWxfc2VjcmV0IjoiOTRmMGE1NDMtMzIzMi00ZGM2LWJkMzctZTFjM2JhZDAzN2EyIn0.91CpHcOtPFi17TKsz_itSOhTsuv5yzglUUXqYeDR9LM",
     "DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=...",
 
     "US_APP_KEY": "6g92g071ehm0g",

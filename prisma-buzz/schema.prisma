@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Product {
+  id             String    @id @default(cuid())
+  tiktokId       String    @unique
+  title          String
+  searchTitle    String
+  cover          String
+  categories     Int[]
+  categoryNames  String[]
+  seoUrl         String
+  sellerId       String
+  description    String?
+  images         Json?
+  sellerName     String?
+  sellerAvatar   String?
+  comparePrice   Float?
+  price          Float?
+  priceRange     String?
+  discount       Float?
+  commission     Int?
+  currency       String?
+  currencySymbol String?
+  unitsSold      Int?
+  inStock        Int?
+  gmv            Int?
+  rating         Float?
+  reviewCount    Int?
+  saleRegion     String?
+  metadata       Json?
+  creatorCount   Int?
+  lastSync       DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@map("Products")
+}
