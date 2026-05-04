@@ -35,8 +35,8 @@ export async function seedProducts() {
   console.log(`✅ Syncd ${count} products successfully.`);
 }
 
-const formatPayload = (products: Product[]) => {
-  const productPayload = products.map((p) => {
+const formatProducts = (products: Product[]) => {
+  return products.map((p) => {
     const {
       tiktokId,
       title,
@@ -86,5 +86,13 @@ const formatPayload = (products: Product[]) => {
       },
       lastSync: startOfUTCDay(new Date()),
     };
+  });
+};
+
+const getBrandData = (products: Product[]) => {
+  return products.map((p) => {
+    const { sellerId, sellerName, sellerAvatar } = p;
+
+    return { tiktokId: sellerId, name: sellerName, avatar: sellerAvatar, region: ['US'] };
   });
 };
