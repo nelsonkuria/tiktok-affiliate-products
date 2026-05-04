@@ -3,6 +3,7 @@ import type { Product } from '#/prisma-buzz/generated/prisma/client.js';
 import { startOfUTCDay } from './helpers.js';
 import prismaBuzz from './prisma.buzz.js';
 import prisma from './prisma.js';
+import prismaTsc from './prisma.tsc.js';
 
 const BATCH_SIZE = 1000;
 
@@ -22,10 +23,19 @@ export async function seedProducts() {
 
     if (products.length === 0) break;
 
-    await prisma.product.createMany({
-      data: [],
+    // local db product insert
+    const insertProducts = prisma.product.createMany({
+      data: formatProducts(products),
       skipDuplicates: true,
     });
+
+    // tiktok-shop-creators db insert brands
+    const insertBrands = prismaTsc.brands.createMany({
+      data: getBrandData(products),
+      skipDuplicates: true,
+    });
+
+    await Promise.all([insertProducts, insertBrands]);
 
     cursor = products[products.length - 1].id;
     count++;
@@ -35,7 +45,7 @@ export async function seedProducts() {
   console.log(`✅ Syncd ${count} products successfully.`);
 }
 
-const formatProducts = (products: Product[]) => {
+function formatProducts(products: Product[]) {
   return products.map((p) => {
     const {
       tiktokId,
@@ -77,7 +87,7 @@ const formatProducts = (products: Product[]) => {
         amount: '',
         currency: 'USD',
       },
-      unitsSold,
+      unitsSold: unitsSold ?? 0,
       hasInventory: true,
       shop: {
         id: sellerId,
@@ -87,12 +97,19 @@ const formatProducts = (products: Product[]) => {
       lastSync: startOfUTCDay(new Date()),
     };
   });
-};
+}
 
-const getBrandData = (products: Product[]) => {
-  return products.map((p) => {
-    const { sellerId, sellerName, sellerAvatar } = p;
+function getBrandData(products: Product[]) {
+  return products
+    .filter((p) => Boolean(p.sellerName))
+    .map((p) => {
+      const { sellerId, sellerName, sellerAvatar } = p;
 
-    return { tiktokId: sellerId, name: sellerName, avatar: sellerAvatar, region: ['US'] };
-  });
-};
+      return {
+        tiktokId: sellerId,
+        name: sellerName ?? '',
+        avatar: sellerAvatar ?? '',
+        region: ['US'],
+      };
+    });
+}
