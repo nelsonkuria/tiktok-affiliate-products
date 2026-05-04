@@ -5,7 +5,7 @@ import prismaBuzz from './prisma.buzz.js';
 import prisma from './prisma.js';
 import prismaTsc from './prisma.tsc.js';
 
-const BATCH_SIZE = 1000;
+const BATCH_SIZE = 200;
 
 export async function seedProducts() {
   let cursor = '';
@@ -109,7 +109,7 @@ function getBrandData(products: Product[]) {
         tiktokId: sellerId,
         name: sellerName ?? '',
         avatar: sellerAvatar ?? '',
-        region: ['US'],
+        regions: ['US'],
       };
     });
 }

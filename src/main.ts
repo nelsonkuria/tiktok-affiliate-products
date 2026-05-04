@@ -1,5 +1,7 @@
 import { Actor } from 'apify';
 
+import { seedProducts } from './utils/seeder.js';
+
 await Actor.init();
 
 interface Input {
@@ -13,7 +15,8 @@ if (!input) throw new Error('Please provide a resource');
 const { resource, region } = input;
 console.log('input', { resource, region });
 
-console.log('Initialised apify starter.');
+console.log('Seeding products..');
+await seedProducts();
 
 const creator = {};
 
