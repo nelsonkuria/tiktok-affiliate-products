@@ -73,3 +73,38 @@ export const getProductSearchTitle = (title: string, commission?: boolean) => {
 
   return unique.join(' ');
 };
+
+export const parseTikTokProductUrl = (url: string) => {
+  const emptyResponse = { id: '', title: '' };
+  const { pathname } = new URL(url);
+
+  // Remove trailing slash and split
+  const parts = pathname.replace(/\/$/, '').split('/');
+
+  // Expect: /shop/pdp/<slug?>/<id>
+  const pdpIndex = parts.indexOf('pdp');
+  if (pdpIndex === -1) return emptyResponse;
+
+  const afterPdp = parts.slice(pdpIndex + 1);
+
+  if (afterPdp.length !== 2) {
+    // Only ID present
+    const id = afterPdp[0];
+    if (!/^\d+$/.test(id)) return emptyResponse;
+
+    return { id, title: '' };
+  }
+
+  if (afterPdp.length === 2) {
+    const [slug, id] = afterPdp;
+
+    if (!/^\d+$/.test(id)) return emptyResponse;
+
+    return {
+      id,
+      title: slug !== 'product' ? slug : '',
+    };
+  }
+
+  return { id: '', title: '' };
+};
