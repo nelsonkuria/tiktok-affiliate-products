@@ -108,20 +108,16 @@ export const getSellerCredentials = async (region: string) => {
         return { cipher, accessToken, isFallback: false };
       }
 
-      return { cipher, accessToken: connection.accessToken, isFallback: false };
+      return { cipher, accessToken: connection.accessToken as string, isFallback: false };
     }
   }
 
   // await prisma.$accelerate.invalidate({ tags: ['get_seller']})
 
-  const cipher = process.env.FALLBACK_SHOP_CIPHER;
-  const accessToken = process.env.FALLBACK_ACCESS_TOKEN;
+  const cipher = process.env.FALLBACK_SHOP_CIPHER as string;
+  const accessToken = process.env.FALLBACK_ACCESS_TOKEN as string;
 
-  if (cipher && accessToken) {
-    return { cipher, accessToken, isFallback: true };
-  }
-
-  return null;
+  return { cipher, accessToken, isFallback: true };
 };
 
 const getQueryParams = (request: Request | string) => {
