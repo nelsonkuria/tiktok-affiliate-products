@@ -24,19 +24,24 @@ export interface FetchResult<T> {
   error?: string;
 }
 
+export type APIProduct = {
+  id: string;
+  shop: { name: string };
+  main_image_url: string;
+  title: string;
+  sale_region: string;
+  category_chains: { id: string; local_name: string }[];
+  detail_link: string;
+  units_sold: number;
+  has_inventory: boolean;
+  commission: { rate: number; currency: string; amount: string };
+  original_price: { currency: string; minimum_amount: string; maximum_amount: string };
+  sales_price: { currency: string; minimum_amount: string; maximum_amount: string };
+};
+
 export interface ProductsResponse extends BaseAPIResponse {
   data: {
-    products: {
-      id: string;
-      shop: { name: string };
-      main_image_url: string;
-      units_sold: number;
-      title: string;
-      sale_region: string;
-      detail_link: string;
-      commission: { rate: number };
-      sales_price: { currency: string; minimum_amount: string; maximum_amount: string };
-    }[];
+    products: APIProduct[];
     next_page_token: string;
     total_count: number;
   };

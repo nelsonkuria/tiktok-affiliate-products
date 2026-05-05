@@ -1,6 +1,6 @@
 import { searchProduct } from '~/api/products.js';
 import { getProductSearchTitle } from '~/api/utils.js';
-import type { ProductsResponse } from '~/types/TikTok.js';
+import type { APIProduct, ProductsResponse } from '~/types/TikTok.js';
 import { isWithinDays, startOfUTCDay } from '~/utils/dates.js';
 import prisma from '~/utils/prisma.js';
 import { getResult, getSellerCredentials } from '~/utils/tiktok.js';
@@ -50,7 +50,6 @@ export async function getAffiliateProduct(input: Product) {
       // Or upsert so we update products that already exist
       // Do I care about number of units sold 🤔
 
-      const today = startOfUTCDay(new Date());
       const targetProduct = products.find((p) => p.id === id);
 
       if (targetProduct) {
@@ -99,4 +98,45 @@ async function fetchDbProduct(id: string) {
   }
 
   return { product: null, isCurrent: false };
+}
+
+async function formatProduct(product: APIProduct) {
+  const {
+    id,
+    title,
+    sale_region,
+    category_chains,
+    main_image_url,
+    detail_link,
+    original_price: op,
+    sales_price: sp,
+    units_sold,
+    commission,
+    has_inventory,
+    shop,
+  } = product;
+
+  return {
+    tiktokId: id,
+    title,
+    mainImage: main_image_url,
+    detailsLink: detail_link,
+    categories: category_chains.map((c) => ({ id: c.id, name: c.local_name })),
+    saleRegion: sale_region,
+    originalPrice: {
+      currency: op.currency,
+      minimum: op.minimum_amount,
+      maximum: op.maximum_amount,
+    },
+    salesPrice: {
+      currency: sp.currency,
+      minimum: sp.minimum_amount,
+      maximum: sp.maximum_amount,
+    },
+    commission: { ...commission, rate: commission.rate / 100 },
+    unitsSold: units_sold,
+    hasInventory: has_inventory,
+    shop,
+    lastSync: startOfUTCDay(new Date()),
+  };
 }
