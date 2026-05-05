@@ -4,17 +4,22 @@ import prisma from '~/utils/prisma.js';
 import { getSellerCredentials } from '~/utils/tiktok.js';
 
 type Product = {
-  id: true;
+  id: string;
   title: string;
   category: string;
   price?: number;
   region: string;
 };
 
-type Shop = { id: string; name: string; link: string };
+type Seller = { id: string; name: string; link: string };
 
 export async function getAffiliateProduct(input: Product) {
   const { id, title, category, price, region } = input;
+  const dbProduct = await fetchDbProduct(id);
+  const { product, isCurrent } = dbProduct;
+
+  if (product && isCurrent) return product;
+
   const { cipher, accessToken } = await getSellerCredentials(region);
   const searchTitle = getProductSearchTitle(title);
   const keywords = searchTitle.split(' ').slice(0, 4);
@@ -44,12 +49,14 @@ async function fetchDbProduct(id: string) {
   });
 
   if (product) {
-    const shop = product.shop as Shop;
-    const { id: sid, name } = shop;
+    const { shop, lastSync, ...rest } = product;
+
+    const seller = shop as Seller;
+    const { id: sid, name } = seller;
 
     return {
-      product: { ...product, shop: { id: sid, name } },
-      isCurrent: isWithinDays('7d', product.lastSync),
+      product: { ...rest, shop: { id: sid, name } },
+      isCurrent: isWithinDays('7d', lastSync),
     };
   }
 
