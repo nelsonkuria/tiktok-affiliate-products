@@ -19,3 +19,8 @@ Store an array of stat values.
 
 If `lastSync` is not today, update product record.
 Get new `date`, `unitsSold` and `price` and push to array `{ date, price, unitsSold }`
+
+### Input style
+
+1. Endpoint - resource endpoint
+2. Params for said endpoint
