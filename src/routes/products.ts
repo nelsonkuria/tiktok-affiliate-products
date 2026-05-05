@@ -1,7 +1,9 @@
+import { searchProduct } from '~/api/products.js';
 import { getProductSearchTitle } from '~/api/utils.js';
-import { isWithinDays } from '~/utils/dates.js';
+import type { ProductsResponse } from '~/types/TikTok.js';
+import { isWithinDays, startOfUTCDay } from '~/utils/dates.js';
 import prisma from '~/utils/prisma.js';
-import { getSellerCredentials } from '~/utils/tiktok.js';
+import { getResult, getSellerCredentials } from '~/utils/tiktok.js';
 
 type Product = {
   id: string;
@@ -27,6 +29,42 @@ export async function getAffiliateProduct(input: Product) {
 
   const filters = { keywords, category, priceRange };
   console.log('filters', filters);
+
+  const loopLimit = 10;
+  let nextPageToken: string = '';
+
+  for (let i = 0; i < loopLimit; i++) {
+    const { result } = await searchProduct(
+      cipher,
+      accessToken,
+      filters,
+      nextPageToken,
+      region,
+    );
+
+    const { data } = getResult(result) as ProductsResponse;
+    const { products, next_page_token } = data;
+
+    if (products.length) {
+      // Insert all products to db
+      // Or upsert so we update products that already exist
+      // Do I care about number of units sold 🤔
+
+      const today = startOfUTCDay(new Date());
+      const targetProduct = products.find((p) => p.id === id);
+
+      if (targetProduct) {
+        console.log('🟢 Found product');
+        // return product with success message
+      }
+    } else {
+      nextPageToken = next_page_token;
+    }
+  }
+
+  console.log('🔴 Could not find product.');
+  // return failure message with null product value
+  return null;
 }
 
 async function fetchDbProduct(id: string) {

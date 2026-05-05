@@ -1,12 +1,12 @@
 import type { FetchResult, ProductsResponse } from '~/types/TikTok.js';
 import { ttsFetch } from '~/utils/fetch.js';
 
-export async function getProduct(
+export async function searchProduct(
   cipher: string,
   token: string,
   filters: {
     keywords?: string[];
-    category: number;
+    category: string;
     priceRange: { lt?: number; ge: number };
   },
   pageToken: string,
@@ -17,7 +17,7 @@ export async function getProduct(
   const query = { shop_cipher: cipher, page_size: '20', ...page };
   const body = {
     title_keywords: filters.keywords,
-    category: { id: `${filters.category}` },
+    category: { id: filters.category },
     sales_price_range: {
       amount_ge: `${filters.priceRange.ge}`,
     },
