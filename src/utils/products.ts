@@ -1,6 +1,6 @@
 import type { Product } from '#/prisma-buzz/generated/prisma/client.js';
 
-import { startOfUTCDay } from './helpers.js';
+import { startOfUTCDay } from './dates.js';
 import prismaBuzz from './prisma.buzz.js';
 import prisma from './prisma.js';
 import prismaTsc from './prisma.tsc.js';

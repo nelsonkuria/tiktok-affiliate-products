@@ -172,3 +172,7 @@ export async function generateSign(
 
   return hmac.digest('hex');
 }
+
+export function getResult<T>(resultFn?: () => T): T | null {
+  return resultFn ? resultFn() : null;
+}

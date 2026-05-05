@@ -7,3 +7,7 @@ export function isWithinDays(target: '7d', date: Date) {
 
   return date >= sevenDaysAgo && date <= now;
 }
+
+export const startOfUTCDay = (date: Date) => {
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+};
