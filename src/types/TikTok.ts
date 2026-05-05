@@ -17,3 +17,27 @@ export interface AccessTokenResponse extends BaseAPIResponse {
     granted_scopes: string[];
   };
 }
+
+export interface FetchResult<T> {
+  status: 'success' | 'error';
+  result?: () => T;
+  error?: string;
+}
+
+export interface ProductsResponse extends BaseAPIResponse {
+  data: {
+    products: {
+      id: string;
+      shop: { name: string };
+      main_image_url: string;
+      units_sold: number;
+      title: string;
+      sale_region: string;
+      detail_link: string;
+      commission: { rate: number };
+      sales_price: { currency: string; minimum_amount: string; maximum_amount: string };
+    }[];
+    next_page_token: string;
+    total_count: number;
+  };
+}
