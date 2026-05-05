@@ -23,3 +23,35 @@ export async function getAffiliateProduct(input: Product) {
   const filters = { keywords, category, priceRange };
   console.log('filters', filters);
 }
+
+async function fetchDbProduct(id: string) {
+  const product = await prisma.product.findUnique({
+    where: { tiktokId: id },
+    select: {
+      title: true,
+      mainImage: true,
+      detailsLink: true,
+      categories: true,
+      saleRegion: true,
+      originalPrice: true,
+      salesPrice: true,
+      commission: true,
+      unitsSold: true,
+      hasInventory: true,
+      shop: true,
+      lastSync: true,
+    },
+  });
+
+  if (product) {
+    const shop = product.shop as Shop;
+    const { id: sid, name } = shop;
+
+    return {
+      product: { ...product, shop: { id: sid, name } },
+      isCurrent: isWithinDays('7d', product.lastSync),
+    };
+  }
+
+  return { product: null, isCurrent: false };
+}
