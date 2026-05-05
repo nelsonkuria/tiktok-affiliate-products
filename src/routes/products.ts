@@ -5,6 +5,7 @@ import { isWithinDays, startOfUTCDay } from '~/utils/dates.js';
 import prisma from '~/utils/prisma.js';
 import { getResult, getSellerCredentials } from '~/utils/tiktok.js';
 
+// Maybe also accept url as input?
 type Product = {
   id: string;
   title: string;
@@ -31,7 +32,7 @@ export async function getAffiliateProduct(input: Product) {
   console.log('filters', filters);
 
   const loopLimit = 10;
-  let nextPageToken: string = '';
+  let nextPageToken = '';
 
   for (let i = 0; i < loopLimit; i++) {
     const { result } = await searchProduct(
@@ -46,15 +47,44 @@ export async function getAffiliateProduct(input: Product) {
     const { products, next_page_token } = data;
 
     if (products.length) {
-      // Insert all products to db
-      // Or upsert so we update products that already exist
-      // Do I care about number of units sold 🤔
+      const otherProducts = products.filter((p) => p.id !== id);
+      await prisma.product.createMany({
+        data: otherProducts.map((p) => formatProduct(p)),
+        skipDuplicates: true,
+      });
 
       const targetProduct = products.find((p) => p.id === id);
-
       if (targetProduct) {
         console.log('🟢 Found product');
-        // return product with success message
+        const formattedProduct = formatProduct(targetProduct);
+        const { tiktokId, lastSync, ...returnProduct } = formattedProduct;
+
+        const targetDbProduct = await prisma.product.findUnique({
+          where: { tiktokId: id },
+          select: { shop: true },
+        });
+
+        if (targetDbProduct) {
+          const seller = targetDbProduct.shop as Seller;
+          const shopData = seller?.id
+            ? { id: seller.id, ...formattedProduct.shop }
+            : formattedProduct.shop;
+
+          await prisma.product.update({
+            where: { tiktokId: id },
+            data: { ...formattedProduct, shop: shopData },
+          });
+
+          return { code: 1, status: 'success', data: { ...returnProduct, shop: shopData } };
+        }
+
+        if (!targetDbProduct) {
+          await prisma.product.create({
+            data: formattedProduct,
+          });
+
+          return { code: 1, status: 'success', data: { ...returnProduct } };
+        }
       }
     } else {
       nextPageToken = next_page_token;
@@ -100,7 +130,7 @@ async function fetchDbProduct(id: string) {
   return { product: null, isCurrent: false };
 }
 
-async function formatProduct(product: APIProduct) {
+function formatProduct(product: APIProduct) {
   const {
     id,
     title,
