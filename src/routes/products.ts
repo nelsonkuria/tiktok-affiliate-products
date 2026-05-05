@@ -21,7 +21,7 @@ export async function getAffiliateProduct(input: Product) {
   const dbProduct = await fetchDbProduct(id);
   const { product, isCurrent } = dbProduct;
 
-  if (product && isCurrent) return product;
+  if (product && isCurrent) return { code: 1, status: 'success', data: product };
 
   const { cipher, accessToken } = await getSellerCredentials(region);
   const searchTitle = getProductSearchTitle(title);
@@ -75,7 +75,11 @@ export async function getAffiliateProduct(input: Product) {
             data: { ...formattedProduct, shop: shopData },
           });
 
-          return { code: 1, status: 'success', data: { ...returnProduct, shop: shopData } };
+          return {
+            code: 1,
+            status: 'success',
+            data: { id: tiktokId, ...returnProduct, shop: shopData },
+          };
         }
 
         if (!targetDbProduct) {
@@ -83,7 +87,7 @@ export async function getAffiliateProduct(input: Product) {
             data: formattedProduct,
           });
 
-          return { code: 1, status: 'success', data: { ...returnProduct } };
+          return { code: 1, status: 'success', data: { id: tiktokId, ...returnProduct } };
         }
       }
     } else {
@@ -91,9 +95,10 @@ export async function getAffiliateProduct(input: Product) {
     }
   }
 
+  if (product) return { code: 1, status: 'success', data: product };
+
   console.log('🔴 Could not find product.');
-  // return failure message with null product value
-  return null;
+  return { code: 1, status: 'success', data: product };
 }
 
 async function fetchDbProduct(id: string) {
