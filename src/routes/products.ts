@@ -1,6 +1,6 @@
 import { searchProduct } from '~/api/products.js';
 import { getProductSearchTitle } from '~/api/utils.js';
-import type { APIProduct, ProductsResponse } from '~/types/TikTok.js';
+import type { APIProduct, Event, ProductsResponse } from '~/types/TikTok.js';
 import { isWithinDays, startOfUTCDay } from '~/utils/dates.js';
 import prisma from '~/utils/prisma.js';
 import { getResult, getSellerCredentials } from '~/utils/tiktok.js';
@@ -16,7 +16,37 @@ type Args = {
 
 type Seller = { id: string; name: string; link: string };
 
+export type Result = {
+  code: 0 | 1;
+  status: 'success' | 'error';
+  messages: string[] | undefined;
+  event: Event;
+  data: {
+    id: string;
+    title: string;
+    mainImage: string;
+    detailsLink: string;
+    categories: { id: string; name: string }[];
+    saleRegion: 'US';
+    originalPrice: { currency: string; minimum: string; maximum: string };
+    salesPrice: { currency: string; minimum: string; maximum: string };
+    commission: {
+      rate: number;
+      amount: string;
+      currency: string;
+    };
+    unitsSold: number;
+    hasInventory: boolean;
+    shop: {
+      id: string | undefined;
+      name: string;
+    };
+  } | null;
+};
+
 export async function getAffiliateProduct(args: Record<string, string | number | boolean>) {
+  const event: Event = { name: 'products', count: 1 };
+
   const { id, title, category, price, region } = args as Args;
   const country = region ?? 'US';
 
@@ -25,13 +55,16 @@ export async function getAffiliateProduct(args: Record<string, string | number |
       code: 0,
       status: 'error',
       messages: ['Please provide all the required arguments.'],
+      event,
+      data: null,
     };
   }
 
   const dbProduct = await fetchDbProduct(id);
   const { product, isCurrent } = dbProduct;
 
-  if (product && isCurrent) return { code: 1, status: 'success', data: product };
+  if (product && isCurrent)
+    return { code: 1, status: 'success', event, data: { id, ...product } };
 
   const { cipher, accessToken } = await getSellerCredentials(country);
   const searchTitle = getProductSearchTitle(title);
@@ -88,6 +121,7 @@ export async function getAffiliateProduct(args: Record<string, string | number |
           return {
             code: 1,
             status: 'success',
+            event,
             data: { id: tiktokId, ...returnProduct, shop: shopData },
           };
         }
@@ -97,7 +131,12 @@ export async function getAffiliateProduct(args: Record<string, string | number |
             data: formattedProduct,
           });
 
-          return { code: 1, status: 'success', data: { id: tiktokId, ...returnProduct } };
+          return {
+            code: 1,
+            status: 'success',
+            event,
+            data: { id: tiktokId, ...returnProduct },
+          };
         }
       }
     } else {
@@ -105,10 +144,16 @@ export async function getAffiliateProduct(args: Record<string, string | number |
     }
   }
 
-  if (product) return { code: 1, status: 'success', data: product };
+  if (product) return { code: 1, status: 'success', event, data: product };
 
   console.log('🔴 Could not find product.');
-  return { code: 1, status: 'success', data: product };
+  return {
+    code: 0,
+    status: 'error',
+    event,
+    messages: ['Could not find product.'],
+    data: product,
+  };
 }
 
 async function fetchDbProduct(id: string) {

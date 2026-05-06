@@ -17,14 +17,13 @@ const { endpoint, params } = input;
 const target = await findTarget(endpoint);
 
 if (target === '/products') {
-  await getAffiliateProduct(params);
-}
+  const result = await getAffiliateProduct(params);
+  const { code, status, event, messages, data } = result;
+  const payload = { code, status, ...(messages ? { messages } : {}), data };
 
-const creator = {};
+  await Actor.charge({ eventName: event.name, count: 1 });
 
-if (creator) {
-  // console.log('creator', creator);
-  await Actor.pushData(creator);
+  await Actor.pushData(payload);
 }
 
 await Actor.exit();

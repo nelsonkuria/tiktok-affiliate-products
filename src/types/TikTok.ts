@@ -47,5 +47,10 @@ export interface ProductsResponse extends BaseAPIResponse {
   };
 }
 
+export const eventTypes = ['products'] as const;
+
+export type EventTypes = (typeof eventTypes)[number];
+export type Event = { name: EventTypes; count: number };
+
 export const targetTypes = ['/products'] as const;
 export type TargetTypes = (typeof targetTypes)[number];
