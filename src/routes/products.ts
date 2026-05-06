@@ -63,8 +63,10 @@ export async function getAffiliateProduct(args: Record<string, string | number |
   const dbProduct = await fetchDbProduct(id);
   const { product, isCurrent } = dbProduct;
 
-  if (product && isCurrent)
+  if (product && isCurrent) {
+    console.log('bD Crnt');
     return { code: 1, status: 'success', event, data: { id, ...product } };
+  }
 
   const { cipher, accessToken } = await getSellerCredentials(country);
   const searchTitle = getProductSearchTitle(title);
@@ -98,7 +100,7 @@ export async function getAffiliateProduct(args: Record<string, string | number |
 
       const targetProduct = products.find((p) => p.id === id);
       if (targetProduct) {
-        console.log('🟢 Found product');
+        console.log('🟢 Found product', i);
         const formattedProduct = formatProduct(targetProduct);
         const { tiktokId, lastSync, ...returnProduct } = formattedProduct;
 
