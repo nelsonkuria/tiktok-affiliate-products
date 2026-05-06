@@ -17,5 +17,5 @@
       "editor": "json"
     }
   },
-  "required": ["resource", "params"]
+  "required": ["endpoint", "params"]
 }

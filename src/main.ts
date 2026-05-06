@@ -2,7 +2,6 @@ import { Actor } from 'apify';
 
 import { findTarget } from './api/helpers.js';
 import { getAffiliateProduct } from './routes/products.js';
-import { seedProducts } from './utils/products.js';
 
 await Actor.init();
 
@@ -20,9 +19,6 @@ const target = await findTarget(endpoint);
 if (target === '/products') {
   await getAffiliateProduct(params);
 }
-
-console.log('Seeding products..');
-await seedProducts();
 
 const creator = {};
 
