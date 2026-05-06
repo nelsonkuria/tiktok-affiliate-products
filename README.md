@@ -81,8 +81,44 @@ Retruns specific product information.
 
 ```js
 {
+  id: '1729680238081774226',
+  title: 'Mobilo Card | Smart Business Card - Tap, Share, Connect',
+  mainImage: 'https://p16-oec-general-useast5.ttcdn-us.com/...',
+  detailsLink: 'https://www.tiktok.com/shop/pdp/mobilo-smart-business-card-4-ways-to-connect-track-networking/1729680238081774226',
+  categories: [
+    {
+      id: "601755",
+      name: "Computers & Office Equipment"
+    },
+    {
+      id: "831112",
+      name: "Office Stationery & Supplies"
+    },
+    {
+      id: "855560",
+      name: "Cards & Card Stock"
+    }
+  ],
+  saleRegion: 'US',
+  originalPrice: { currency: 'USD', minimum: '19.49', maximum: '24.99' },
+  salesPrice: { currency: 'USD', minimum: '19.49', maximum: '24.99' },
+  commission: {
+    rate: 25,
+    amount: '4.9',
+    currency: 'USD',
+  },
+  unitsSold: 32942,
+  hasInventory: true,
+  shop: {
+    id: '7495130177152912000',
+    name: 'MOBILO'
+  },
 }
 ```
+
+Note:
+
+> Some fields e.g. `shop.id` may be empty depending on availability.
 
 ---
 
@@ -99,4 +135,4 @@ This is a **practical data access layer** — not overloaded, but reliable where
 
 ## 📩 Contact
 
-- For any queries, requests for more data or consultation send an email to `lemurxn@gmail.com` ✌️
+For any queries, requests for more data or consultation send an email to `lemurxn@gmail.com` ✌️
