@@ -18,10 +18,23 @@ const target = await findTarget(endpoint);
 
 if (target === '/products') {
   const result = await getAffiliateProduct(params);
-  const { code, status, event, messages, data } = result;
-  const payload = { code, status, ...(messages ? { messages } : {}), data };
+  const { status, event, messages, data } = result;
+  const payload = { status, ...(messages ? { messages } : {}), data };
 
   await Actor.charge({ eventName: event.name, count: 1 });
+
+  await Actor.pushData(payload);
+}
+
+if (target) {
+  const payload = {
+    status: 'error',
+    messages: [
+      'Unsupported endpoint.',
+      'You might have a typo in your endpoint or you entered an unsupported endpoint. Please check the reference.',
+    ],
+    data: null,
+  };
 
   await Actor.pushData(payload);
 }
