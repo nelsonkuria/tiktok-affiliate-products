@@ -18,12 +18,15 @@ const target = await findTarget(endpoint);
 
 if (target === '/products') {
   const result = await getAffiliateProduct(params);
-  const { status, event, messages, data } = result;
+  const { status, messages, data } = result;
   const payload = { status, ...(messages ? { messages } : {}), data };
+  console.log('payload');
+  console.dir(payload, { depth: null });
 
   // await Actor.charge({ eventName: event.name, count: 1 });
 
   await Actor.pushData(payload);
+  await Actor.exit();
 }
 
 if (target) {
