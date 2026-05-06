@@ -1,7 +1,7 @@
 import { searchProduct } from '../api/products.js';
 import { getProductSearchTitle } from '../api/utils.js';
 import type { APIProduct, Event, ProductsResponse } from '../types/TikTok.js';
-import { isWithinDays, startOfUTCDay } from '../utils/dates.js';
+import { isInLosAngelesHourRange, startOfUTCDay } from '../utils/dates.js';
 import prisma from '../utils/prisma.js';
 import { getResult, getSellerCredentials } from '../utils/tiktok.js';
 
@@ -172,19 +172,19 @@ async function fetchDbProduct(id: string) {
       unitsSold: true,
       hasInventory: true,
       shop: true,
-      lastSync: true,
+      updatedAt: true,
     },
   });
 
   if (product) {
-    const { shop, lastSync, ...rest } = product;
+    const { shop, updatedAt, ...rest } = product;
 
     const seller = shop as Seller;
     const { id: sid, name } = seller;
 
     return {
       product: { ...rest, shop: { id: sid, name } },
-      isCurrent: isWithinDays('7d', lastSync),
+      isCurrent: isInLosAngelesHourRange(6, 1, updatedAt),
     };
   }
 
