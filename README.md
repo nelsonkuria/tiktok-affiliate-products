@@ -134,6 +134,12 @@ This is a **practical data access layer** — not overloaded, but reliable where
 
 ---
 
+## 💰 Pricing
+
+If you're on the Business plan or regularly make more than 250k+ requests per month, contact me for more discounted pricing.
+
+---
+
 ## 📩 Contact
 
 For any queries, requests for more data or consultation send an email to `lemurxn@gmail.com` ✌️
