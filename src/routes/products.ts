@@ -6,29 +6,39 @@ import prisma from '~/utils/prisma.js';
 import { getResult, getSellerCredentials } from '~/utils/tiktok.js';
 
 // Maybe also accept url as input?
-type Product = {
+type Args = {
   id: string;
   title: string;
-  category: string;
+  category?: string;
   price?: number;
-  region: string;
+  region?: string;
 };
 
 type Seller = { id: string; name: string; link: string };
 
-export async function getAffiliateProduct(input: Product) {
-  const { id, title, category, price, region } = input;
+export async function getAffiliateProduct(args: Record<string, string | number | boolean>) {
+  const { id, title, category, price, region } = args as Args;
+  const country = region ?? 'US';
+
+  if (!id || !title) {
+    return {
+      code: 0,
+      status: 'error',
+      messages: ['Please provide all the required arguments.'],
+    };
+  }
+
   const dbProduct = await fetchDbProduct(id);
   const { product, isCurrent } = dbProduct;
 
   if (product && isCurrent) return { code: 1, status: 'success', data: product };
 
-  const { cipher, accessToken } = await getSellerCredentials(region);
+  const { cipher, accessToken } = await getSellerCredentials(country);
   const searchTitle = getProductSearchTitle(title);
-  const keywords = searchTitle.split(' ').slice(0, 4);
+  const keywords = searchTitle.split(' ').slice(0, 3);
   const priceRange = price ? { ge: price } : { ge: 1 };
 
-  const filters = { keywords, category, priceRange };
+  const filters = { keywords, category: category ?? '', priceRange };
   console.log('filters', filters);
 
   const loopLimit = 10;
@@ -40,7 +50,7 @@ export async function getAffiliateProduct(input: Product) {
       accessToken,
       filters,
       nextPageToken,
-      region,
+      country,
     );
 
     const { data } = getResult(result) as ProductsResponse;

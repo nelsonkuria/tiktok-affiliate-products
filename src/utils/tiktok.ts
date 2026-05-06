@@ -36,10 +36,10 @@ const getSeller = async (region: string) => {
 
 export const getRegionCredentials = (region: string) => {
   const appKey = (
-    region === 'us' ? process.env.US_APP_KEY : process.env.FALLBACK_APP_KEY
+    region === 'US' ? process.env.US_APP_KEY : process.env.FALLBACK_APP_KEY
   ) as string;
   const appSecret = (
-    region === 'us' ? process.env.US_APP_SECRET : process.env.FALLBACK_APP_SECRET
+    region === 'US' ? process.env.US_APP_SECRET : process.env.FALLBACK_APP_SECRET
   ) as string;
   return { appKey, appSecret };
 };
