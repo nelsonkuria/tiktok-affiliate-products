@@ -1,5 +1,5 @@
-import type { TargetTypes } from '~/types/TikTok.js';
-import { targetTypes } from '~/types/TikTok.js';
+import type { TargetTypes } from '../types/TikTok.js';
+import { targetTypes } from '../types/TikTok.js';
 
 export async function findTarget(endpoint: string) {
   const url = new URL(endpoint, 'https://api.apify.com');

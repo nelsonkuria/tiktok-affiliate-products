@@ -1,5 +1,5 @@
-import type { FetchResult, ProductsResponse } from '~/types/TikTok.js';
-import { ttsFetch } from '~/utils/fetch.js';
+import type { FetchResult, ProductsResponse } from '../types/TikTok.js';
+import { ttsFetch } from '../utils/fetch.js';
 
 export async function searchProduct(
   cipher: string,

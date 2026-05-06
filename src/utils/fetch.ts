@@ -1,5 +1,4 @@
-import type { BaseAPIResponse } from '~/types/TikTok.js';
-
+import type { BaseAPIResponse } from '../types/TikTok.js';
 import { generateSign, getRegionCredentials, getTimeStamp } from './tiktok.js';
 
 interface FetchQuery {
