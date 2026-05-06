@@ -21,12 +21,13 @@ if (target === '/products') {
   const { status, event, messages, data } = result;
   const payload = { status, ...(messages ? { messages } : {}), data };
 
-  await Actor.charge({ eventName: event.name, count: 1 });
+  // await Actor.charge({ eventName: event.name, count: 1 });
 
   await Actor.pushData(payload);
 }
 
 if (target) {
+  console.log('🔴 Unsupported endpoint.');
   const payload = {
     status: 'error',
     messages: [
