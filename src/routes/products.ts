@@ -74,7 +74,6 @@ export async function getAffiliateProduct(args: Record<string, string | number |
   const priceRange = price ? { ge: price } : { ge: 1 };
 
   const filters = { keywords, category: category ?? '', priceRange };
-  console.log('filters', filters);
 
   const loopLimit = 10;
   let nextPageToken = '';

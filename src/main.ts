@@ -20,8 +20,8 @@ if (target === '/products') {
   const result = await getAffiliateProduct(params);
   const { status, messages, data } = result;
   const payload = { status, ...(messages ? { messages } : {}), data };
-  console.log('payload');
-  console.dir(payload, { depth: null });
+  // console.log('payload');
+  // console.dir(payload, { depth: null });
 
   // await Actor.charge({ eventName: event.name, count: 1 });
 
