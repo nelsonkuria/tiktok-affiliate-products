@@ -1,5 +1,5 @@
 {
-  "title": "Fetch UFC data",
+  "title": "Get TikTok Affiliate Product data",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
@@ -14,7 +14,11 @@
       "title": "Params",
       "type": "object",
       "description": "Search params",
-      "editor": "json"
+      "editor": "json",
+      "prefill": {
+        "id": "1731996819249271400",
+        "title": "Earth Breeze Laundry Detergent Sheets: Powerful Clean, Safe Ingredients, No Harsh Chemical Residue from Optical Brighteners, Gentle on Skin, 60 Loads"
+      }
     }
   },
   "required": ["endpoint", "params"]

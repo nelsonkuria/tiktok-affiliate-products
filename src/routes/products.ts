@@ -1,6 +1,5 @@
-import { getProductSearchTitle } from '~/api/utils.js';
-
 import { searchProduct } from '../api/products.js';
+import { getProductSearchTitle } from '../api/utils.js';
 import type { APIProduct, Event, ProductsResponse } from '../types/TikTok.js';
 import { isWithinDays, startOfUTCDay } from '../utils/dates.js';
 import prisma from '../utils/prisma.js';
