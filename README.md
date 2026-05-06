@@ -116,9 +116,10 @@ Retruns specific product information.
 }
 ```
 
-Note:
+⚠️ Note:
 
-> Some fields e.g. `shop.id` may be empty depending on availability.
+- The value `commission.rate` is the actual percentage commission value - `25` = `25%`
+- Some fields e.g. `shop.id` may be empty depending on availability.
 
 ---
 
