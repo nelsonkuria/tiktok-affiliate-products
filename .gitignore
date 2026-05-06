@@ -16,7 +16,7 @@ storage/key_value_stores/*
 storage/key_value_stores/default/*
 !storage/key_value_stores/default/INPUT.json
 
-/prisma-buzz
+# /prisma-buzz
 
 # Added by Apify CLI
 .venv
