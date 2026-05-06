@@ -15,9 +15,10 @@ export async function searchProduct(
   let result: FetchResult<ProductsResponse>;
   const page = pageToken ? { page_token: pageToken } : null;
   const query = { shop_cipher: cipher, page_size: '20', ...page };
+  const category = filters.category.length ? { category: { id: filters.category } } : {};
   const body = {
     title_keywords: filters.keywords,
-    category: { id: filters.category },
+    ...category,
     sales_price_range: {
       amount_ge: `${filters.priceRange.ge}`,
     },

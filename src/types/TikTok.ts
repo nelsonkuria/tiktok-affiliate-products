@@ -46,3 +46,6 @@ export interface ProductsResponse extends BaseAPIResponse {
     total_count: number;
   };
 }
+
+export const targetTypes = ['/products'] as const;
+export type TargetTypes = (typeof targetTypes)[number];
