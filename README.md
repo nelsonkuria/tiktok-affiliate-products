@@ -45,6 +45,13 @@ If you work in **influencer marketing**, **e-commerce**, or **social commerce in
 
 ---
 
+## 🧩 Related Actors
+
+- [TikTok Shop Creators](https://apify.com/lemur/tiktok-shop-creators) - Get creator performance insights
+- [TikTok Shop Product Scraper](https://apify.com/lemur/tiktok-shop-products) - Scrape TikTok Shop product pages.
+
+---
+
 ## ⚙️ How to Use
 
 1. Choose an `endpoint`
